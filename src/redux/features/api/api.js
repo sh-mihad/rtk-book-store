@@ -7,8 +7,31 @@ export const booksApi = createApi({
       getBooks: builder.query({
         query:()=>'/books',
       }),
+      geSingletBooks: builder.query({
+        query:(id)=>`/books/${id}`,
+      }),
+      addBook:builder.mutation({
+        query:(data)=>({
+          url:'/books',
+          method: "POST",
+          body:data
+        })
+      }),
+      updateBook:builder.mutation({
+        query:({id,data})=>({
+          url:`/books/${id}`,
+          method: "PATCH",
+          body:data
+        })
+      }),
+      deleteBook:builder.mutation({
+        query:(id)=>({
+          url:`/books/${id}`,
+          method: "DELETE",
+        })
+      }),
     }),
 })
 
-export const {useGetBooksQuery} = booksApi
+export const {useGetBooksQuery,useGeSingletBooksQuery,useAddBookMutation,useUpdateBookMutation,useDeleteBookMutation} = booksApi
 
